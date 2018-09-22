@@ -1,10 +1,38 @@
 ﻿@page
 @model IndexModel
-@{
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*@{
     ViewData["Title"] = "Home page";
-}
+}*@
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+<h1>Contacts</h1>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in Model.Customers)
+            {
+                <tr>
+                    <td>contact.Id</td>
+                    <td>contact.Name</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>
+                        <button type="submit" asp-page-handler="delete" asp-route-id="@contact.Id">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-page="./Create">Create</a>
+</form>
+
+@*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -93,4 +121,4 @@
             <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure App Service</a></li>
         </ul>
     </div>
-</div>
+</div>*@
